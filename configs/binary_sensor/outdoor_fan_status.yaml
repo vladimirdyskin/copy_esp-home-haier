@@ -1,0 +1,5 @@
+﻿binary_sensor:
+  - platform: haier
+    haier_id: ${device_id}
+    outdoor_fan_status:
+      name: ${device_name} Outdoor Fan Status

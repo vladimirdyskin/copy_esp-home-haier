@@ -1,0 +1,8 @@
+esphome:
+  on_boot:
+    - priority: 250.0
+      then:
+        - globals.set:
+            id: ${reboots_counter}
+            value: !lambda |-
+              return id(${reboots_counter}) + 1;

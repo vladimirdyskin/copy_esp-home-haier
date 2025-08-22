@@ -1,0 +1,4 @@
+switch:
+  - platform: haier
+    display:
+      name: ${device_name} display

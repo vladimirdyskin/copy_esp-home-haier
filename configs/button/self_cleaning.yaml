@@ -1,0 +1,5 @@
+button:
+  - platform: haier
+    haier_id: ${device_id}
+    self_cleaning:
+      name: ${device_name} start self cleaning

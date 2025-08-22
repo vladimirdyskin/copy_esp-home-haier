@@ -1,0 +1,64 @@
+﻿climate:
+  - platform: haier
+    id: ${device_id}
+    protocol: hon
+    name: ${device_name}
+    uart_id: ${uart_id}
+    wifi_signal: ${send_wifi}   # Optional, default true, enables WiFI signal transmission from ESP to AC
+    visual:                     # Optional, you can use it to limit min and max temperatures in UI (not working for remote!)
+      min_temperature: 16 °C
+      max_temperature: 30 °C
+      temperature_step: 
+        target_temperature: 1
+        current_temperature: 0.5
+    supported_modes:            # Optional, can be used to disable some modes if you don't need them
+      - 'OFF'                     # always available
+      - HEAT_COOL                 # always available
+      - COOL
+      - HEAT
+      - DRY
+      - FAN_ONLY
+    supported_swing_modes:      # Optional, can be used to disable some swing modes if your AC does not support it
+      - 'OFF'
+      - VERTICAL
+      - HORIZONTAL
+      - BOTH
+    supported_presets:          # Optional, can be used to disable some presets if your AC does not support it
+      - BOOST
+      - SLEEP
+    # Next two triggers calling Home Assistant services to notify user about alarms triggered by AC
+    # this functionality is disabled by default. To enable it check "Allow the device to make Home Assistant service calls"
+    # checkbox in Home Assistant's device settings
+    on_alarm_start:
+      then:
+        - homeassistant.service:
+            service: logbook.log
+            data:
+              domain: climate
+              name: ${device_name}
+            data_template:
+              message: "Alarm activated ({{ alarm_code }}): {{alarm_message}}" 
+            variables:
+              alarm_message: !lambda "return message;"
+              alarm_code: !lambda "return code;"
+        - homeassistant.service:
+            service: notify.persistent_notification
+            data:
+              title: "${device_name}: alarm activated"
+            data_template:
+              message: "Code: {{ alarm_code }}, message: \"{{ alarm_message }}\""
+            variables:
+              alarm_message: !lambda "return message;"
+              alarm_code: !lambda "return code;"
+    on_alarm_end:
+      then:
+        - homeassistant.service:
+            service: logbook.log
+            data:
+              domain: climate
+              name: ${device_name}
+            data_template:
+              message: "Alarm deactivated ({{ alarm_code }}): {{alarm_message}}" 
+            variables:
+              alarm_message: !lambda "return message;"
+              alarm_code: !lambda "return code;"

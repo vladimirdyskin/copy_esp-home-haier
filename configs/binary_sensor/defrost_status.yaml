@@ -1,0 +1,5 @@
+﻿binary_sensor:
+  - platform: haier
+    haier_id: ${device_id}
+    defrost_status:
+      name: ${device_name} Defrost Status

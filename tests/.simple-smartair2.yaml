@@ -1,0 +1,3 @@
+﻿climate:
+  - platform: haier
+    name: ${device_name}

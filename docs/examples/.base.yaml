@@ -1,0 +1,19 @@
+﻿esphome:
+  name: esp32-haier-example
+
+esp32:
+  board: esp32dev
+
+logger:
+  level: DEBUG
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+external_components:
+  source:
+    type: local
+    path: ../../components
+  components: [ haier ]
+

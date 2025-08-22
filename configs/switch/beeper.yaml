@@ -1,0 +1,4 @@
+switch:
+  - platform: haier
+    beeper:
+      name: ${device_name} beeper

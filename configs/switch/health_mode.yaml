@@ -1,0 +1,4 @@
+switch:
+  - platform: haier
+    health_mode:
+      name: ${device_name} health mode

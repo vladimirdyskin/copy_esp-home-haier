@@ -1,0 +1,5 @@
+globals:
+  - id: ${reboots_counter}
+    type: int
+    restore_value: yes
+    initial_value: '0'

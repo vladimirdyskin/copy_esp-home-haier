@@ -1,0 +1,5 @@
+﻿binary_sensor:
+  - platform: haier
+    haier_id: ${device_id}
+    four_way_valve_status:
+      name: ${device_name} Four-way Valve Status

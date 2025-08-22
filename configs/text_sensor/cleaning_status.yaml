@@ -1,0 +1,7 @@
+text_sensor:
+  - platform: haier
+    haier_id: ${device_id}
+    cleaning_status:
+      name: ${device_name} cleaning status
+
+

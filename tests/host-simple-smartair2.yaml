@@ -1,0 +1,16 @@
+esphome:
+  name: host-simple-smartair2
+
+host:
+
+uart:
+  baud_rate: 9600
+  port: /dev/ttyUSB0
+
+logger:
+  level: DEBUG
+  baud_rate: 0
+
+packages:
+  local_haier: !include .local-haier.yaml
+  haier_base: !include .simple-smartair2.yaml 
